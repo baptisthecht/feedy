@@ -1,0 +1,240 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Utilisateur de l'application
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String // Stockez toujours un hash, jamais le mot de passe en clair
+  name      String?
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  vehicles      Vehicle[]
+  appointments  Appointment[]
+  notifications Notification[]
+}
+
+// Garage partenaire
+model Garage {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  city        String
+  postalCode  String
+  latitude    Float?
+  longitude   Float?
+  phone       String
+  email       String   @unique
+  website     String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  services     ServiceGarage[]
+  appointments Appointment[]
+  employees    Employee[]
+}
+
+// Employé de garage
+model Employee {
+  id       String @id @default(cuid())
+  name     String
+  email    String @unique
+  password String // Stockez toujours un hash, jamais le mot de passe en clair
+  role     Role   @default(MECHANIC)
+
+  // Relations
+  garageId String
+  garage   Garage @relation(fields: [garageId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MECHANIC
+  RECEPTIONIST
+}
+
+// Véhicule
+model Vehicle {
+  id             String    @id @default(cuid())
+  brand          String
+  model          String
+  year           Int
+  licensePlate   String    @unique
+  vin            String?   @unique
+  currentMileage Int
+  fuelType       String?
+  photoUrl       String?
+  purchaseDate   DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Relations
+  userId          String
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  maintenances    Maintenance[]
+  appointments    Appointment[]
+  reminderConfigs ReminderConfig[]
+}
+
+// Entretien effectué
+model Maintenance {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  mileage     Int
+  date        DateTime
+  cost        Float
+  invoiceUrl  String?
+  photoUrls   String[]
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  serviceId String?
+  service   Service? @relation(fields: [serviceId], references: [id])
+}
+
+// Service d'entretien
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  maintenances    Maintenance[]
+  serviceGarages  ServiceGarage[]
+  reminderConfigs ReminderConfig[]
+}
+
+// Relation many-to-many entre Service et Garage avec prix
+model ServiceGarage {
+  id       String @id @default(cuid())
+  price    Float
+  duration Int // Durée estimée en minutes
+
+  // Relations
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+  garageId  String
+  garage    Garage  @relation(fields: [garageId], references: [id])
+
+  @@unique([serviceId, garageId])
+}
+
+// Configuration de rappel pour l'entretien
+model ReminderConfig {
+  id              String       @id @default(cuid())
+  reminderType    ReminderType
+  intervalMonths  Int? // Pour les rappels basés sur le temps
+  intervalMileage Int? // Pour les rappels basés sur le kilométrage
+  isActive        Boolean      @default(true)
+  lastTriggeredAt DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  // Relations
+  vehicleId String
+  vehicle   Vehicle    @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  serviceId String?
+  service   Service?   @relation(fields: [serviceId], references: [id])
+  reminders Reminder[]
+}
+
+enum ReminderType {
+  OIL_CHANGE
+  TIRE_ROTATION
+  TECHNICAL_INSPECTION
+  BRAKE_CHECK
+  TIMING_BELT
+  INSURANCE_RENEWAL
+  CUSTOM
+}
+
+// Rappel généré
+model Reminder {
+  id          String   @id @default(cuid())
+  title       String
+  message     String
+  dueDate     DateTime
+  isRead      Boolean  @default(false)
+  isDismissed Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  reminderConfigId String
+  reminderConfig   ReminderConfig @relation(fields: [reminderConfigId], references: [id], onDelete: Cascade)
+  notificationId   String?
+  notification     Notification?  @relation(fields: [notificationId], references: [id])
+}
+
+// Notification envoyée à l'utilisateur
+model Notification {
+  id        String           @id @default(cuid())
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  // Relations
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reminders Reminder[]
+}
+
+enum NotificationType {
+  REMINDER
+  APPOINTMENT
+  SYSTEM
+}
+
+// Rendez-vous
+model Appointment {
+  id        String            @id @default(cuid())
+  date      DateTime
+  status    AppointmentStatus @default(PENDING)
+  notes     String?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  // Relations
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  vehicleId  String
+  vehicle    Vehicle  @relation(fields: [vehicleId], references: [id])
+  garageId   String
+  garage     Garage   @relation(fields: [garageId], references: [id])
+  serviceIds String[] // IDs des services demandés
+  totalPrice Float // Prix total estimé
+  duration   Int // Durée totale estimée en minutes
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}

@@ -1,0 +1,31 @@
+{
+  "name": "car-maintenance-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "build": "pnpm --parallel -r build",
+    "start": "pnpm --parallel -r start",
+    "lint": "pnpm --parallel -r lint",
+    "db:generate": "pnpm --filter @car-maintenance/database db:generate",
+    "db:push": "pnpm --filter @car-maintenance/database db:push",
+    "db:studio": "pnpm --filter @car-maintenance/database db:studio"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.2",
+    "@remixicon/react": "^4.6.0",
+    "clsx": "^2.1.1",
+    "eslint": "^9.26.0",
+    "react": "^19.0.0",
+    "tailwind-merge": "^2",
+    "tailwind-variants": "^1.0.0"
+  }
+}
