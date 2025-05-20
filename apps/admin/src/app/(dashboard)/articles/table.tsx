@@ -1,0 +1,508 @@
+"use client";
+
+import {
+  Avatar,
+  AvatarImage,
+  Button,
+  ButtonIcon,
+  Checkbox,
+  StatusBadge,
+  StatusBadgeIcon,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableRowDivider,
+} from "@feedy/shared";
+import {
+  RiArrowDownSFill,
+  RiArrowUpSFill,
+  RiCheckboxCircleFill,
+  RiExpandUpDownFill,
+  RiMore2Line,
+} from "@remixicon/react";
+import {
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type ColumnDef,
+  type SortingState,
+} from "@tanstack/react-table";
+import * as React from "react";
+
+const data: Data[] = [
+  {
+    id: "326860c3",
+    member: {
+      name: "James Brown",
+      email: "james@alignui.com",
+      image: "/images/avatar/illustration/james.png",
+    },
+    title: {
+      name: "Marketing Manager",
+      date: "Since Aug, 2021",
+    },
+    project: {
+      name: "Monday.com",
+      description: "Campaign Strategy Brainstorming",
+      image: ["/images/major-brands/monday.svg"],
+    },
+    doc: {
+      name: "brown-james.pdf",
+      size: "2.4 MB",
+    },
+    status: {
+      variant: "completed",
+      label: "Active",
+    },
+  },
+  {
+    id: "8a2c57d0",
+    member: {
+      name: "Sophia Williams",
+      email: "sophia@alignui.com",
+      image: "/images/avatar/illustration/sophia.png",
+    },
+    title: {
+      name: "HR Assistant",
+      date: "Since Aug, 2021",
+    },
+    project: {
+      name: "Notion",
+      description: "Employee Engagement Survey",
+      image: [
+        "/images/major-brands/notion.svg",
+        "/images/major-brands/notion-white.svg",
+      ],
+    },
+    doc: {
+      name: "williams-sophia.pdf",
+      size: "2.4 MB",
+    },
+    status: {
+      variant: "completed",
+      label: "Active",
+    },
+  },
+  {
+    id: "1a6256ab",
+    member: {
+      name: "Arthur Taylor",
+      email: "arthur@alignui.com",
+      image: "/images/avatar/illustration/arthur.png",
+    },
+    title: {
+      name: "Entrepreneur / CEO",
+      date: "Since May, 2022",
+    },
+    project: {
+      name: "Spotify",
+      description: "Vision and Goal Setting Session",
+      image: ["/images/major-brands/spotify.svg"],
+    },
+    doc: {
+      name: "taylor-arthur.pdf",
+      size: "2.4 MB",
+    },
+    status: {
+      variant: "disabled",
+      label: "Absent",
+    },
+  },
+  {
+    id: "9f92efe3",
+    member: {
+      name: "Emma Wright",
+      email: "emma@alignui.com",
+      image: "/images/avatar/illustration/emma.png",
+    },
+    title: {
+      name: "Front-end Developer",
+      date: "Since Sep, 2022",
+    },
+    project: {
+      name: "Formcarry",
+      description: "User Feedback Analysis",
+      image: ["/images/major-brands/formcarry.svg"],
+    },
+    doc: {
+      name: "wright-emma.pdf",
+      size: "1.9 MB",
+    },
+    status: {
+      variant: "completed",
+      label: "Active",
+    },
+  },
+  {
+    id: "a5b7b936",
+    member: {
+      name: "Matthew Johnson",
+      email: "matthew@alignui.com",
+      image: "/images/avatar/illustration/matthew.png",
+    },
+    title: {
+      name: "Data Software Engineer",
+      date: "Since Feb, 2022",
+    },
+    project: {
+      name: "Loom",
+      description: "Data Analysis Methodology",
+      image: ["/images/major-brands/loom.svg"],
+    },
+    doc: {
+      name: "johnson-matthew.pdf",
+      size: "2.9 MB",
+    },
+    status: {
+      variant: "completed",
+      label: "Active",
+    },
+  },
+  {
+    id: "0153ab9a",
+    member: {
+      name: "Laura Perez",
+      email: "laura@alignui.com",
+      image: "/images/avatar/illustration/laura.png",
+    },
+    title: {
+      name: "Fashion Designer",
+      date: "Since Mar, 2022",
+    },
+    project: {
+      name: "Tidal",
+      description: "Design Trends and Inspirations",
+      image: [
+        "/images/major-brands/tidal.svg",
+        "/images/major-brands/tidal-white.svg",
+      ],
+    },
+    doc: {
+      name: "perez-laura.pdf",
+      size: "2.5 MB",
+    },
+    status: {
+      variant: "disabled",
+      label: "Absent",
+    },
+  },
+  {
+    id: "e18b8b38",
+    member: {
+      name: "Wei Chen",
+      email: "wei@alignui.com",
+      image: "/images/avatar/illustration/wei.png",
+    },
+    title: {
+      name: "Operations Manager",
+      date: "Since July, 2021",
+    },
+    project: {
+      name: "Dropbox",
+      description: "Process Optimization Brainstorming",
+      image: ["/images/major-brands/dropbox.svg"],
+    },
+    doc: {
+      name: "chen-wei.pdf",
+      size: "2.6 MB",
+    },
+    status: {
+      variant: "completed",
+      label: "Active",
+    },
+  },
+];
+
+type Data = {
+  id: string;
+  member: {
+    name: string;
+    email: string;
+    image: string;
+  };
+  title: {
+    name: string;
+    date: string;
+  };
+  project: {
+    name: string;
+    description: string;
+    image: [string, string?];
+  };
+  doc: {
+    name: string;
+    size: string;
+  };
+  status: {
+    variant: "completed" | "pending" | "failed" | "disabled";
+    label: string;
+  };
+};
+
+const getSortingIcon = (state: "asc" | "desc" | false) => {
+  if (state === "asc")
+    return <RiArrowUpSFill className="text-text-sub-600 size-5" />;
+  if (state === "desc")
+    return <RiArrowDownSFill className="text-text-sub-600 size-5" />;
+  return <RiExpandUpDownFill className="text-text-sub-600 size-5" />;
+};
+
+const columns: ColumnDef<Data>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    id: "member",
+    accessorKey: "member.name",
+    header: ({ column }) => (
+      <div className="flex items-center gap-0.5">
+        Member Name
+        <button
+          type="button"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {getSortingIcon(column.getIsSorted())}
+        </button>
+      </div>
+    ),
+    enableSorting: true,
+    cell: ({ row }) => (
+      <div className="flex items-center gap-3">
+        <Avatar size="40">
+          <AvatarImage src={row.original.member.image} />
+        </Avatar>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-label-sm text-text-strong-950">
+            {row.original.member.name}
+          </span>
+          <span className="text-paragraph-xs text-text-sub-600">
+            {row.original.member.email}
+          </span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "title",
+    accessorKey: "title.name",
+    header: ({ column }) => (
+      <div className="flex min-w-36 items-center gap-0.5">
+        Title
+        <button
+          type="button"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {getSortingIcon(column.getIsSorted())}
+        </button>
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div className="flex flex-col gap-0.5">
+        <span className="text-label-sm text-text-strong-950">
+          {row.original.title.name}
+        </span>
+        <span className="text-paragraph-xs text-text-sub-600">
+          {row.original.title.date}
+        </span>
+      </div>
+    ),
+  },
+  {
+    id: "project",
+    accessorKey: "project.name",
+    header: ({ column }) => (
+      <div className="flex min-w-48 items-center gap-0.5">
+        Projects
+        <button
+          type="button"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {getSortingIcon(column.getIsSorted())}
+        </button>
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div className="flex items-center gap-3">
+        <div className="bg-bg-white-0 shadow-regular-xs ring-stroke-soft-200 flex size-10 shrink-0 items-center justify-center rounded-full ring-1 ring-inset">
+          <picture>
+            {row.original.project.image.length > 1 && (
+              <source
+                srcSet={row.original.project.image[1]}
+                media="(prefers-color-scheme: dark)"
+              />
+            )}
+            <img
+              src={row.original.project.image[0]}
+              alt=""
+              width={28}
+              height={28}
+            />
+          </picture>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-label-sm text-text-strong-950">
+            {row.original.project.name}
+          </span>
+          <span className="text-paragraph-xs text-text-sub-600">
+            {row.original.project.description}
+          </span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "doc",
+    accessorKey: "doc.name",
+    header: ({ column }) => (
+      <div className="flex items-center gap-0.5 whitespace-nowrap">
+        Member Documents
+        <button
+          type="button"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {getSortingIcon(column.getIsSorted())}
+        </button>
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div className="flex items-center gap-3">
+        {/* <FileFormatIcon.Root format="PDF" size="small" color="red" /> */}
+        <div className="flex flex-col gap-0.5">
+          <span className="text-label-sm text-text-strong-950">
+            {row.original.doc.name}
+          </span>
+          <span className="text-paragraph-xs text-text-sub-600">
+            {row.original.doc.size}
+          </span>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "status",
+    accessorKey: "status.label",
+    header: ({ column }) => (
+      <div className="flex items-center gap-0.5">
+        Status
+        <button
+          type="button"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {getSortingIcon(column.getIsSorted())}
+        </button>
+      </div>
+    ),
+    cell: ({ row }) => (
+      <StatusBadge status={row.original.status.variant}>
+        <StatusBadgeIcon as={RiCheckboxCircleFill} />
+        {row.original.status.label}
+      </StatusBadge>
+    ),
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: () => (
+      <Button variant="neutral" mode="ghost" size="xsmall">
+        <ButtonIcon as={RiMore2Line} />
+      </Button>
+    ),
+  },
+];
+
+export function DataTableDemo() {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const table = useReactTable({
+    data: [...data, ...data, ...data, ...data, ...data, ...data, ...data],
+    columns,
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      sorting,
+      pagination,
+    },
+    onPaginationChange: setPagination,
+    initialState: {
+      sorting: [
+        {
+          id: "member",
+          desc: true,
+        },
+      ],
+    },
+  });
+
+  return (
+    <div className="w-full">
+      <Table>
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </TableHead>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length > 0 &&
+            table.getRowModel().rows.map((row, i, arr) => (
+              <React.Fragment key={row.id}>
+                <TableRow data-state={row.getIsSelected() && "selected"}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+                {i < arr.length - 1 && <TableRowDivider />}
+              </React.Fragment>
+            ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}

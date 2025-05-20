@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String            @id
+  name                  String
+  firstname             String
+  lastname              String
+  email                 String
+  emailVerified         Boolean
+  image                 String?
+  lastManagedOrganizationId String?
+  createdAt             DateTime
+  updatedAt             DateTime
+  sessions              Session[]
+  accounts              Account[]
+  organizations         OrganizationUser[]
+  lastManagedOrganization Organization?   @relation("LastManagedOrganization", fields: [lastManagedOrganizationId], references: [id])
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Organization {
+  id          String         @id
+  name        String
+  address     String?
+  createdAt   DateTime
+  updatedAt   DateTime
+  users       OrganizationUser[]
+  roles       Role[]
+  lastManagedBy User[]       @relation("LastManagedOrganization")
+
+  @@map("organization")
+}
+
+model OrganizationUser {
+  id             String       @id
+  organizationId String
+  userId         String
+  roleId         String
+  createdAt      DateTime
+  updatedAt      DateTime
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           Role         @relation(fields: [roleId], references: [id])
+
+  @@unique([organizationId, userId])
+  @@map("organization_user")
+}
+
+model Role {
+  id                String            @id
+  name              String
+  description       String?
+  organizationId    String
+  permissions       String[]
+  createdAt         DateTime
+  updatedAt         DateTime
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationUsers OrganizationUser[]
+
+  @@unique([organizationId, name])
+  @@map("role")
+}
