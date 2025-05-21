@@ -10,7 +10,8 @@
     "lint": "pnpm --parallel -r lint",
     "db:generate": "pnpm --filter @feedy/shared db:generate",
     "db:push": "pnpm --filter @feedy/shared db:push",
-    "db:studio": "pnpm --filter @feedy/shared db:studio"
+    "db:studio": "pnpm --filter @feedy/shared db:studio",
+    "prisma:generate": "prisma generate --schema=./packages/shared/prisma/schema.prisma"
   },
   "devDependencies": {
     "@types/node": "^20.17.47",
