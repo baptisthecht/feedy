@@ -228,7 +228,13 @@ exports.Prisma.IngredientScalarFieldEnum = {
   name: 'name',
   description: 'description',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isVegetarian: 'isVegetarian',
+  isVegan: 'isVegan',
+  isGlutenFree: 'isGlutenFree',
+  isLactoseFree: 'isLactoseFree',
+  isHalal: 'isHalal',
+  isKosher: 'isKosher'
 };
 
 exports.Prisma.ProductIngredientScalarFieldEnum = {

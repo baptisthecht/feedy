@@ -125,7 +125,7 @@ enum ProductStatus {
 model Product {
   id String @id @default(uuid())
   name String
-  description String
+  description String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
   status ProductStatus @default(INACTIVE)
@@ -164,6 +164,12 @@ model Ingredient {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
   products ProductIngredient[]
+  isVegetarian Boolean @default(false)
+  isVegan Boolean @default(false)
+  isGlutenFree Boolean @default(false)
+  isLactoseFree Boolean @default(false)
+  isHalal Boolean @default(false)
+  isKosher Boolean @default(false)
 
   @@map("ingredient")
 }

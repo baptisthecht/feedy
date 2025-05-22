@@ -12,5 +12,6 @@ export * from "./popover";
 export * from "./select";
 export * from "./shortcut";
 export * from "./status-badge";
+export * from "./switch";
 export * from "./tag";
 export * from "./text-area";

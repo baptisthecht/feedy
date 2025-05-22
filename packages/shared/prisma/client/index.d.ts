@@ -10107,7 +10107,7 @@ export namespace Prisma {
   export type ProductGroupByOutputType = {
     id: string
     name: string
-    description: string
+    description: string | null
     createdAt: Date
     updatedAt: Date
     status: $Enums.ProductStatus
@@ -10252,7 +10252,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      description: string
+      description: string | null
       createdAt: Date
       updatedAt: Date
       status: $Enums.ProductStatus
@@ -12251,6 +12251,12 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isVegetarian: boolean | null
+    isVegan: boolean | null
+    isGlutenFree: boolean | null
+    isLactoseFree: boolean | null
+    isHalal: boolean | null
+    isKosher: boolean | null
   }
 
   export type IngredientMaxAggregateOutputType = {
@@ -12259,6 +12265,12 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isVegetarian: boolean | null
+    isVegan: boolean | null
+    isGlutenFree: boolean | null
+    isLactoseFree: boolean | null
+    isHalal: boolean | null
+    isKosher: boolean | null
   }
 
   export type IngredientCountAggregateOutputType = {
@@ -12267,6 +12279,12 @@ export namespace Prisma {
     description: number
     createdAt: number
     updatedAt: number
+    isVegetarian: number
+    isVegan: number
+    isGlutenFree: number
+    isLactoseFree: number
+    isHalal: number
+    isKosher: number
     _all: number
   }
 
@@ -12277,6 +12295,12 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    isVegetarian?: true
+    isVegan?: true
+    isGlutenFree?: true
+    isLactoseFree?: true
+    isHalal?: true
+    isKosher?: true
   }
 
   export type IngredientMaxAggregateInputType = {
@@ -12285,6 +12309,12 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    isVegetarian?: true
+    isVegan?: true
+    isGlutenFree?: true
+    isLactoseFree?: true
+    isHalal?: true
+    isKosher?: true
   }
 
   export type IngredientCountAggregateInputType = {
@@ -12293,6 +12323,12 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    isVegetarian?: true
+    isVegan?: true
+    isGlutenFree?: true
+    isLactoseFree?: true
+    isHalal?: true
+    isKosher?: true
     _all?: true
   }
 
@@ -12374,6 +12410,12 @@ export namespace Prisma {
     description: string | null
     createdAt: Date
     updatedAt: Date
+    isVegetarian: boolean
+    isVegan: boolean
+    isGlutenFree: boolean
+    isLactoseFree: boolean
+    isHalal: boolean
+    isKosher: boolean
     _count: IngredientCountAggregateOutputType | null
     _min: IngredientMinAggregateOutputType | null
     _max: IngredientMaxAggregateOutputType | null
@@ -12399,6 +12441,12 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
     products?: boolean | Ingredient$productsArgs<ExtArgs>
     _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ingredient"]>
@@ -12409,6 +12457,12 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }, ExtArgs["result"]["ingredient"]>
 
   export type IngredientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -12417,6 +12471,12 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }, ExtArgs["result"]["ingredient"]>
 
   export type IngredientSelectScalar = {
@@ -12425,9 +12485,15 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }
 
-  export type IngredientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["ingredient"]>
+  export type IngredientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt" | "isVegetarian" | "isVegan" | "isGlutenFree" | "isLactoseFree" | "isHalal" | "isKosher", ExtArgs["result"]["ingredient"]>
   export type IngredientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Ingredient$productsArgs<ExtArgs>
     _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
@@ -12446,6 +12512,12 @@ export namespace Prisma {
       description: string | null
       createdAt: Date
       updatedAt: Date
+      isVegetarian: boolean
+      isVegan: boolean
+      isGlutenFree: boolean
+      isLactoseFree: boolean
+      isHalal: boolean
+      isKosher: boolean
     }, ExtArgs["result"]["ingredient"]>
     composites: {}
   }
@@ -12875,6 +12947,12 @@ export namespace Prisma {
     readonly description: FieldRef<"Ingredient", 'String'>
     readonly createdAt: FieldRef<"Ingredient", 'DateTime'>
     readonly updatedAt: FieldRef<"Ingredient", 'DateTime'>
+    readonly isVegetarian: FieldRef<"Ingredient", 'Boolean'>
+    readonly isVegan: FieldRef<"Ingredient", 'Boolean'>
+    readonly isGlutenFree: FieldRef<"Ingredient", 'Boolean'>
+    readonly isLactoseFree: FieldRef<"Ingredient", 'Boolean'>
+    readonly isHalal: FieldRef<"Ingredient", 'Boolean'>
+    readonly isKosher: FieldRef<"Ingredient", 'Boolean'>
   }
     
 
@@ -14572,7 +14650,13 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isVegetarian: 'isVegetarian',
+    isVegan: 'isVegan',
+    isGlutenFree: 'isGlutenFree',
+    isLactoseFree: 'isLactoseFree',
+    isHalal: 'isHalal',
+    isKosher: 'isKosher'
   };
 
   export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
@@ -15219,7 +15303,7 @@ export namespace Prisma {
     NOT?: ProductWhereInput | ProductWhereInput[]
     id?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
+    description?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
@@ -15241,7 +15325,7 @@ export namespace Prisma {
   export type ProductOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     status?: SortOrder
@@ -15266,7 +15350,7 @@ export namespace Prisma {
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
     name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
+    description?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
@@ -15288,7 +15372,7 @@ export namespace Prisma {
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     status?: SortOrder
@@ -15315,7 +15399,7 @@ export namespace Prisma {
     NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
-    description?: StringWithAggregatesFilter<"Product"> | string
+    description?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     status?: EnumProductStatusWithAggregatesFilter<"Product"> | $Enums.ProductStatus
@@ -15395,6 +15479,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"Ingredient"> | string | null
     createdAt?: DateTimeFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
+    isVegetarian?: BoolFilter<"Ingredient"> | boolean
+    isVegan?: BoolFilter<"Ingredient"> | boolean
+    isGlutenFree?: BoolFilter<"Ingredient"> | boolean
+    isLactoseFree?: BoolFilter<"Ingredient"> | boolean
+    isHalal?: BoolFilter<"Ingredient"> | boolean
+    isKosher?: BoolFilter<"Ingredient"> | boolean
     products?: ProductIngredientListRelationFilter
   }
 
@@ -15404,6 +15494,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isVegetarian?: SortOrder
+    isVegan?: SortOrder
+    isGlutenFree?: SortOrder
+    isLactoseFree?: SortOrder
+    isHalal?: SortOrder
+    isKosher?: SortOrder
     products?: ProductIngredientOrderByRelationAggregateInput
   }
 
@@ -15416,6 +15512,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"Ingredient"> | string | null
     createdAt?: DateTimeFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
+    isVegetarian?: BoolFilter<"Ingredient"> | boolean
+    isVegan?: BoolFilter<"Ingredient"> | boolean
+    isGlutenFree?: BoolFilter<"Ingredient"> | boolean
+    isLactoseFree?: BoolFilter<"Ingredient"> | boolean
+    isHalal?: BoolFilter<"Ingredient"> | boolean
+    isKosher?: BoolFilter<"Ingredient"> | boolean
     products?: ProductIngredientListRelationFilter
   }, "id">
 
@@ -15425,6 +15527,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isVegetarian?: SortOrder
+    isVegan?: SortOrder
+    isGlutenFree?: SortOrder
+    isLactoseFree?: SortOrder
+    isHalal?: SortOrder
+    isKosher?: SortOrder
     _count?: IngredientCountOrderByAggregateInput
     _max?: IngredientMaxOrderByAggregateInput
     _min?: IngredientMinOrderByAggregateInput
@@ -15439,6 +15547,12 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Ingredient"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
+    isVegetarian?: BoolWithAggregatesFilter<"Ingredient"> | boolean
+    isVegan?: BoolWithAggregatesFilter<"Ingredient"> | boolean
+    isGlutenFree?: BoolWithAggregatesFilter<"Ingredient"> | boolean
+    isLactoseFree?: BoolWithAggregatesFilter<"Ingredient"> | boolean
+    isHalal?: BoolWithAggregatesFilter<"Ingredient"> | boolean
+    isKosher?: BoolWithAggregatesFilter<"Ingredient"> | boolean
   }
 
   export type ProductIngredientWhereInput = {
@@ -16079,7 +16193,7 @@ export namespace Prisma {
   export type ProductCreateInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -16099,7 +16213,7 @@ export namespace Prisma {
   export type ProductUncheckedCreateInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -16119,7 +16233,7 @@ export namespace Prisma {
   export type ProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -16139,7 +16253,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -16159,7 +16273,7 @@ export namespace Prisma {
   export type ProductCreateManyInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -16178,7 +16292,7 @@ export namespace Prisma {
   export type ProductUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -16195,7 +16309,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -16277,6 +16391,12 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
     products?: ProductIngredientCreateNestedManyWithoutIngredientInput
   }
 
@@ -16286,6 +16406,12 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
     products?: ProductIngredientUncheckedCreateNestedManyWithoutIngredientInput
   }
 
@@ -16295,6 +16421,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
     products?: ProductIngredientUpdateManyWithoutIngredientNestedInput
   }
 
@@ -16304,6 +16436,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
     products?: ProductIngredientUncheckedUpdateManyWithoutIngredientNestedInput
   }
 
@@ -16313,6 +16451,12 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }
 
   export type IngredientUpdateManyMutationInput = {
@@ -16321,6 +16465,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IngredientUncheckedUpdateManyInput = {
@@ -16329,6 +16479,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProductIngredientCreateInput = {
@@ -17025,6 +17181,12 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isVegetarian?: SortOrder
+    isVegan?: SortOrder
+    isGlutenFree?: SortOrder
+    isLactoseFree?: SortOrder
+    isHalal?: SortOrder
+    isKosher?: SortOrder
   }
 
   export type IngredientMaxOrderByAggregateInput = {
@@ -17033,6 +17195,12 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isVegetarian?: SortOrder
+    isVegan?: SortOrder
+    isGlutenFree?: SortOrder
+    isLactoseFree?: SortOrder
+    isHalal?: SortOrder
+    isKosher?: SortOrder
   }
 
   export type IngredientMinOrderByAggregateInput = {
@@ -17041,6 +17209,12 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isVegetarian?: SortOrder
+    isVegan?: SortOrder
+    isGlutenFree?: SortOrder
+    isLactoseFree?: SortOrder
+    isHalal?: SortOrder
+    isKosher?: SortOrder
   }
 
   export type ProductScalarRelationFilter = {
@@ -18441,7 +18615,7 @@ export namespace Prisma {
   export type ProductCreateWithoutOrganizationInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -18460,7 +18634,7 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutOrganizationInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -18585,7 +18759,7 @@ export namespace Prisma {
     NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
     id?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
-    description?: StringFilter<"Product"> | string
+    description?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     status?: EnumProductStatusFilter<"Product"> | $Enums.ProductStatus
@@ -19069,7 +19243,7 @@ export namespace Prisma {
   export type ProductCreateWithoutCategoryInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19088,7 +19262,7 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutCategoryInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19181,7 +19355,7 @@ export namespace Prisma {
   export type ProductCreateWithoutIngredientsInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19200,7 +19374,7 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutIngredientsInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19227,6 +19401,12 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }
 
   export type IngredientUncheckedCreateWithoutProductsInput = {
@@ -19235,6 +19415,12 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isVegetarian?: boolean
+    isVegan?: boolean
+    isGlutenFree?: boolean
+    isLactoseFree?: boolean
+    isHalal?: boolean
+    isKosher?: boolean
   }
 
   export type IngredientCreateOrConnectWithoutProductsInput = {
@@ -19256,7 +19442,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutIngredientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19275,7 +19461,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutIngredientsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19308,6 +19494,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IngredientUncheckedUpdateWithoutProductsInput = {
@@ -19316,6 +19508,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isVegetarian?: BoolFieldUpdateOperationsInput | boolean
+    isVegan?: BoolFieldUpdateOperationsInput | boolean
+    isGlutenFree?: BoolFieldUpdateOperationsInput | boolean
+    isLactoseFree?: BoolFieldUpdateOperationsInput | boolean
+    isHalal?: BoolFieldUpdateOperationsInput | boolean
+    isKosher?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateManyUserInput = {
@@ -19482,7 +19680,7 @@ export namespace Prisma {
   export type ProductCreateManyOrganizationInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19595,7 +19793,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19614,7 +19812,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19633,7 +19831,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19727,7 +19925,7 @@ export namespace Prisma {
   export type ProductCreateManyCategoryInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     status?: $Enums.ProductStatus
@@ -19745,7 +19943,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19764,7 +19962,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus
@@ -19783,7 +19981,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProductStatusFieldUpdateOperationsInput | $Enums.ProductStatus

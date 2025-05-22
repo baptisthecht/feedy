@@ -12,5 +12,6 @@ export const generateMetadata = async () => {
 
 export default async function NewProduct() {
   const categories = await prisma.category.findMany();
-  return <AddProductPage categories={categories} />;
+  const ingredients = await prisma.ingredient.findMany();
+  return <AddProductPage categories={categories} ingredients={ingredients} />;
 }

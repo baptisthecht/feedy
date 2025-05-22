@@ -1,4 +1,4 @@
-import { appear } from "@/motions/appear";
+import { appearFirst } from "@/motions/appear";
 import {
   Button,
   CharCounter,
@@ -39,7 +39,7 @@ export function AddProductEditionStep1() {
   return (
     <motion.div
       className="h-full w-[372px] flex flex-col justify-center gap-8"
-      {...appear}
+      {...appearFirst}
     >
       <div className="flex flex-col">
         <div className="flex flex-col gap-6">
@@ -119,7 +119,7 @@ export function AddProductEditionStep1() {
             id="product-description"
             name="product-description"
             placeholder="Entrer la description du produit"
-            value={product.description}
+            value={product.description || ""}
             disabled={AI}
             onChange={(e) => editProduct("description", e.target.value)}
             shining={AI}

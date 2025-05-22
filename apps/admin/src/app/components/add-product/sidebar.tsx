@@ -1,9 +1,9 @@
-import { appear } from "@/motions/appear";
 import { cn } from "@feedy/shared/utils/cn";
 import { RiCheckboxCircleFill } from "@remixicon/react";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { useAddProduct } from "./context";
+import { appearFirst } from "@/motions/appear";
 export function AddProductSidebar() {
   const { step } = useAddProduct();
   return (
@@ -51,7 +51,7 @@ const Step = ({ title, number }: { title: string; number: number }) => {
           setStep(number);
         }
       }}
-      {...appear}
+      {...appearFirst}
     >
       <p
         className={cn("text-label-sm flex items-center gap-1.5", {
