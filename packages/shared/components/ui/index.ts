@@ -9,5 +9,8 @@ export * from "./hint";
 export * from "./input";
 export * from "./label";
 export * from "./popover";
+export * from "./select";
 export * from "./shortcut";
 export * from "./status-badge";
+export * from "./tag";
+export * from "./text-area";

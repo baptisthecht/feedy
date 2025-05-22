@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id                        String             @id
+  id                        String             @id @default(uuid())
   name                      String
   firstname                 String
   lastname                  String
@@ -29,7 +29,7 @@ model User {
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @default(uuid())
   expiresAt DateTime
   token     String
   createdAt DateTime
@@ -44,7 +44,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(uuid())
   accountId             String
   providerId            String
   userId                String
@@ -63,7 +63,7 @@ model Account {
 }
 
 model Verification {
-  id         String    @id
+  id         String    @id @default(uuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -74,7 +74,7 @@ model Verification {
 }
 
 model Organization {
-  id            String             @id
+  id            String             @id @default(uuid())
   name          String
   address       String?
   createdAt     DateTime
@@ -82,12 +82,13 @@ model Organization {
   users         OrganizationUser[]
   roles         Role[]
   lastManagedBy User[]             @relation("LastManagedOrganization")
+  products      Product[]
 
   @@map("organization")
 }
 
 model OrganizationUser {
-  id             String       @id
+  id             String       @id @default(uuid())
   organizationId String
   userId         String
   roleId         String
@@ -102,7 +103,7 @@ model OrganizationUser {
 }
 
 model Role {
-  id                String             @id
+  id                String             @id @default(uuid())
   name              String
   description       String?
   organizationId    String
@@ -114,4 +115,72 @@ model Role {
 
   @@unique([organizationId, name])
   @@map("role")
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Product {
+  id             String              @id @default(uuid())
+  name           String
+  description    String
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @default(now()) @updatedAt
+  status         ProductStatus       @default(INACTIVE)
+  organizationId String
+  organization   Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  image          String?
+  basePrice      Int
+  ingredients    ProductIngredient[]
+  isVegetarian   Boolean             @default(false)
+  isVegan        Boolean             @default(false)
+  isGlutenFree   Boolean             @default(false)
+  isLactoseFree  Boolean             @default(false)
+  isHalal        Boolean             @default(false)
+  isKosher       Boolean             @default(false)
+  categoryId     String?
+  category       Category?           @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("product")
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  products    Product[]
+
+  @@map("category")
+}
+
+model Ingredient {
+  id          String              @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @default(now()) @updatedAt
+  products    ProductIngredient[]
+
+  @@map("ingredient")
+}
+
+model ProductIngredient {
+  id            String     @id @default(uuid())
+  productId     String
+  ingredientId  String
+  product       Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  ingredient    Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  isVegetarian  Boolean    @default(false)
+  isVegan       Boolean    @default(false)
+  isGlutenFree  Boolean    @default(false)
+  isLactoseFree Boolean    @default(false)
+  isHalal       Boolean    @default(false)
+  isKosher      Boolean    @default(false)
+
+  @@map("product_ingredient")
 }

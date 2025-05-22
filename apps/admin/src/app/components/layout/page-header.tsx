@@ -1,19 +1,28 @@
+"use client";
 import { Button } from "@feedy/shared";
 import {
-  RiAddLine,
-  RiCalendarCheckLine,
+  RemixiconComponentType,
   RiNotification3Line,
   RiSearch2Line,
 } from "@remixicon/react";
 import Image from "next/image";
-import { ComponentType, SVGProps } from "react";
+import { useRouter } from "next/navigation";
+import { JSX } from "react";
+
+type Action = {
+  label: string;
+  icon: JSX.Element;
+  href: string;
+  variant: "primary" | "neutral";
+};
 
 interface PageHeaderProps {
   type: "basic" | "image" | "icon";
   title: string;
   description: string;
   image?: string;
-  icon?: ComponentType<SVGProps<SVGSVGElement>>;
+  icon?: RemixiconComponentType;
+  actions: Action[];
 }
 
 export const PageHeader = ({
@@ -22,7 +31,9 @@ export const PageHeader = ({
   description,
   icon: Icon,
   image,
+  actions,
 }: PageHeaderProps) => {
+  const router = useRouter();
   return (
     <header className="w-full py-5 px-8 flex items-center gap-3 bg-bg-white-0">
       {/* Icon */}
@@ -57,17 +68,18 @@ export const PageHeader = ({
         <RiNotification3Line className="size-5 text-text-sub-600" />
       </button>
 
-      {/* Schedule  */}
-      <Button variant="neutral" mode="stroke" size="medium">
-        <RiCalendarCheckLine className="size-4.5 text-text-sub-600" />
-        <span>Schedule</span>
-      </Button>
-
-      {/* Request  */}
-      <Button variant="primary" mode="filled" size="medium">
-        <RiAddLine className="size-4.5 text-static-white" />
-        <span>Create Request</span>
-      </Button>
+      {actions.map((action) => (
+        <Button
+          key={action.label}
+          variant={action.variant}
+          mode={action.variant === "neutral" ? "stroke" : "filled"}
+          size="medium"
+          onClick={() => router.push(action.href)}
+        >
+          {action.icon}
+          <span>{action.label}</span>
+        </Button>
+      ))}
     </header>
   );
 };

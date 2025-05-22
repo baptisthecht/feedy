@@ -1,5 +1,5 @@
 "use client";
-import { RiCake3Line, RiLayoutGridLine } from "@remixicon/react";
+import { RiLayoutGridLine, RiShoppingBag2Line } from "@remixicon/react";
 import { ChevronRightIcon, SettingsIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,9 +14,9 @@ const navItems = [
     icon: RiLayoutGridLine,
   },
   {
-    label: "Articles",
-    href: "/articles",
-    icon: RiCake3Line,
+    label: "Produits",
+    href: "/products",
+    icon: RiShoppingBag2Line,
   },
   {
     label: "Customers",

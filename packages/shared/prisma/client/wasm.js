@@ -196,6 +196,53 @@ exports.Prisma.RoleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  status: 'status',
+  organizationId: 'organizationId',
+  image: 'image',
+  basePrice: 'basePrice',
+  isVegetarian: 'isVegetarian',
+  isVegan: 'isVegan',
+  isGlutenFree: 'isGlutenFree',
+  isLactoseFree: 'isLactoseFree',
+  isHalal: 'isHalal',
+  isKosher: 'isKosher',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.IngredientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductIngredientScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  ingredientId: 'ingredientId',
+  isVegetarian: 'isVegetarian',
+  isVegan: 'isVegan',
+  isGlutenFree: 'isGlutenFree',
+  isLactoseFree: 'isLactoseFree',
+  isHalal: 'isHalal',
+  isKosher: 'isKosher'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -210,7 +257,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.ProductStatus = exports.$Enums.ProductStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -219,7 +270,11 @@ exports.Prisma.ModelName = {
   Verification: 'Verification',
   Organization: 'Organization',
   OrganizationUser: 'OrganizationUser',
-  Role: 'Role'
+  Role: 'Role',
+  Product: 'Product',
+  Category: 'Category',
+  Ingredient: 'Ingredient',
+  ProductIngredient: 'ProductIngredient'
 };
 
 /**
