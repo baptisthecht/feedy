@@ -22,7 +22,7 @@ interface PageHeaderProps {
   description: string;
   image?: string;
   icon?: RemixiconComponentType;
-  actions: Action[];
+  actions?: Action[];
 }
 
 export const PageHeader = ({
@@ -31,7 +31,7 @@ export const PageHeader = ({
   description,
   icon: Icon,
   image,
-  actions,
+  actions = [],
 }: PageHeaderProps) => {
   const router = useRouter();
   return (
