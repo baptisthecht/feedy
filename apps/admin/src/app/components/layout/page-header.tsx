@@ -1,4 +1,3 @@
-"use client";
 import { Button } from "@feedy/shared";
 import {
   RemixiconComponentType,
@@ -6,7 +5,7 @@ import {
   RiSearch2Line,
 } from "@remixicon/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { JSX } from "react";
 
 type Action = {
@@ -17,7 +16,6 @@ type Action = {
 };
 
 interface PageHeaderProps {
-  type: "basic" | "image" | "icon";
   title: string;
   description: string;
   image?: string;
@@ -26,25 +24,23 @@ interface PageHeaderProps {
 }
 
 export const PageHeader = ({
-  type,
   title,
   description,
   icon: Icon,
   image,
   actions = [],
 }: PageHeaderProps) => {
-  const router = useRouter();
   return (
     <header className="w-full py-5 px-8 flex items-center gap-3 bg-bg-white-0">
       {/* Icon */}
-      {type === "icon" && !!Icon && (
+      {!!Icon && (
         <figure className="size-12 rounded-full bg-bg-white-0 border-stroke-soft-200 border p-3">
-          {<Icon className="size-6 text-text-sub-600" />}
+          {<Icon className="size-6 p-px text-text-sub-600" />}
         </figure>
       )}
 
       {/* Image */}
-      {type === "image" && !!image && (
+      {!!image && (
         <figure className="size-12 rounded-full bg-bg-white-0">
           <Image src={image} alt={title} width={48} height={48} />
         </figure>
@@ -69,16 +65,17 @@ export const PageHeader = ({
       </button>
 
       {actions.map((action) => (
-        <Button
-          key={action.label}
-          variant={action.variant}
-          mode={action.variant === "neutral" ? "stroke" : "filled"}
-          size="medium"
-          onClick={() => router.push(action.href)}
-        >
-          {action.icon}
-          <span>{action.label}</span>
-        </Button>
+        <Link key={action.label} href={action.href}>
+          <Button
+            key={action.label}
+            variant={action.variant}
+            mode={action.variant === "neutral" ? "stroke" : "filled"}
+            size="medium"
+          >
+            {action.icon}
+            <span>{action.label}</span>
+          </Button>
+        </Link>
       ))}
     </header>
   );

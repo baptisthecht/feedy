@@ -111,6 +111,7 @@ const useAddProductState = (
         basePrice: product.basePrice,
         ingredients: ingredientsToAdd,
         status: available ? ProductStatus.ACTIVE : ProductStatus.INACTIVE,
+        categoryId: product.categoryId,
       } as AddProductRequest),
     }).then(() => redirect("/products"));
   };

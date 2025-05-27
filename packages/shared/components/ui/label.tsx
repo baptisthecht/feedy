@@ -1,13 +1,12 @@
 // AlignUI Label v0.0.0
 
-'use client';
+"use client";
 
-import * as React from 'react';
-import * as LabelPrimitives from '@radix-ui/react-label';
-import { cn } from '../../utils';
+import * as LabelPrimitives from "@radix-ui/react-label";
+import * as React from "react";
+import { cn } from "../../utils";
 
-
-const LabelRoot = React.forwardRef<
+const Label = React.forwardRef<
   React.ComponentRef<typeof LabelPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitives.Root> & {
     disabled?: boolean;
@@ -17,10 +16,10 @@ const LabelRoot = React.forwardRef<
     <LabelPrimitives.Root
       ref={forwardedRef}
       className={cn(
-        'group cursor-pointer text-label-sm text-text-strong-950',
-        'flex items-center gap-px',
+        "group cursor-pointer text-label-sm text-text-strong-950",
+        "flex items-center gap-px",
         // disabled
-        'aria-disabled:text-text-disabled-300',
+        "aria-disabled:text-text-disabled-300",
         className,
       )}
       aria-disabled={disabled}
@@ -28,7 +27,7 @@ const LabelRoot = React.forwardRef<
     />
   );
 });
-LabelRoot.displayName = 'LabelRoot';
+Label.displayName = "Label";
 
 function LabelAsterisk({
   className,
@@ -38,14 +37,14 @@ function LabelAsterisk({
   return (
     <span
       className={cn(
-        'text-primary-base',
+        "text-primary-base",
         // disabled
-        'group-aria-disabled:text-text-disabled-300',
+        "group-aria-disabled:text-text-disabled-300",
         className,
       )}
       {...rest}
     >
-      {children || '*'}
+      {children || "*"}
     </span>
   );
 }
@@ -58,9 +57,9 @@ function LabelSub({
   return (
     <span
       className={cn(
-        'text-paragraph-sm text-text-sub-600',
+        "text-paragraph-sm text-text-sub-600",
         // disabled
-        'group-aria-disabled:text-text-disabled-300',
+        "group-aria-disabled:text-text-disabled-300",
         className,
       )}
       {...rest}
@@ -70,4 +69,4 @@ function LabelSub({
   );
 }
 
-export { LabelAsterisk, LabelRoot, LabelSub };
+export { Label, LabelAsterisk, LabelSub };

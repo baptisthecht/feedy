@@ -24,11 +24,10 @@ export function AddProductPreview() {
             alt="Product image"
             width={300}
             height={300}
-            objectFit=""
-            className="mx-auto rounded-xl"
+            className="mx-auto rounded-xl w-full aspect-square object-cover"
           />
         ) : (
-          <div className="border border-dashed border-stroke-soft-200 gap-3 flex flex-col items-center justify-center h-[224px] w-full rounded-xl">
+          <div className="border border-dashed border-stroke-soft-200 gap-3 flex flex-col items-center justify-center aspect-square w-full rounded-xl">
             <div className="rounded-full size-11 bg-bg-weak-50 flex items-center justify-center">
               <RiAddLine className="text-icon-disabled-300" size={24} />
             </div>

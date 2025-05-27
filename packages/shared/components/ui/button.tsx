@@ -1,6 +1,9 @@
+"use client";
 import { Slot } from "@radix-ui/react-slot";
+import { RiLoader2Line } from "@remixicon/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { useState } from "react";
 import { cn } from "../../utils";
 const BUTTON_ROOT_NAME = "ButtonRoot";
 const BUTTON_ICON_NAME = "ButtonIcon";
@@ -165,4 +168,37 @@ function ButtonIcon<T extends React.ElementType = "div">({
 }
 ButtonIcon.displayName = BUTTON_ICON_NAME;
 
-export { Button, ButtonIcon };
+const LoadingButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    { className, variant, mode, size, children, disabled, onClick, ...rest },
+    ref,
+  ) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setIsLoading(true);
+      await (
+        onClick as (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>
+      )?.(e);
+      setIsLoading(false);
+    };
+    return (
+      <Button
+        ref={ref}
+        className={cn(buttonVariants({ variant, mode, size, className }))}
+        {...rest}
+        onClick={handleClick}
+        disabled={isLoading || disabled}
+      >
+        {isLoading ? (
+          <RiLoader2Line className="size-4 animate-spin" />
+        ) : (
+          children
+        )}
+      </Button>
+    );
+  },
+);
+LoadingButton.displayName = "LoadingButton";
+
+export { Button, ButtonIcon, LoadingButton };

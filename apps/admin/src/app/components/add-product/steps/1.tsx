@@ -6,7 +6,7 @@ import {
   Input,
   InputRoot,
   InputWrapper,
-  LabelRoot,
+  Label,
   Select,
   SelectContent,
   SelectItem,
@@ -17,6 +17,7 @@ import {
 import { RiInformation2Fill, RiShoppingBag3Fill } from "@remixicon/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { AddCategoryModal } from "../add-category-modal";
 import { useAddProduct } from "../context";
 
 export function AddProductEditionStep1() {
@@ -57,10 +58,10 @@ export function AddProductEditionStep1() {
       <hr className="border-stroke-soft-200 border-dashed" />
       <div className="flex flex-col gap-7">
         <div className="flex flex-col gap-1">
-          <LabelRoot htmlFor="email" className="gap-1">
+          <Label htmlFor="email" className="gap-1">
             <span>Nom du produit</span>
             <RiInformation2Fill className="text-text-disabled-300 size-4" />
-          </LabelRoot>
+          </Label>
 
           <InputRoot>
             <InputWrapper>
@@ -76,10 +77,11 @@ export function AddProductEditionStep1() {
           </InputRoot>
         </div>
         <div className="flex flex-col gap-1">
-          <LabelRoot htmlFor="email" className="gap-1">
+          <Label htmlFor="email" className="gap-1">
             <span>Catégorie</span>
             <RiInformation2Fill className="text-text-disabled-300 size-4" />
-          </LabelRoot>
+            <AddCategoryModal />
+          </Label>
 
           <Select
             value={product.categoryId || ""}
@@ -98,7 +100,7 @@ export function AddProductEditionStep1() {
           </Select>
         </div>
         <div className="flex flex-col gap-1">
-          <LabelRoot htmlFor="product-description" className="gap-1">
+          <Label htmlFor="product-description" className="gap-1">
             <span>Description</span>
             <RiInformation2Fill className="text-text-disabled-300 size-4" />
             {product.name && (
@@ -113,7 +115,7 @@ export function AddProductEditionStep1() {
                 Générer avec IA
               </p>
             )}
-          </LabelRoot>
+          </Label>
 
           <TextArea
             id="product-description"

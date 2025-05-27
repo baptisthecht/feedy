@@ -1,7 +1,7 @@
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import * as React from "react"
-import { cn } from "../../utils"
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
+import { cn } from "../../utils";
 const compactButtonVariants = cva(
   "relative flex shrink-0 items-center justify-center outline-none transition duration-200 ease-out disabled:pointer-events-none disabled:border-transparent disabled:bg-transparent disabled:text-text-disabled-300 disabled:shadow-none focus:outline-none",
   {
@@ -29,27 +29,32 @@ const compactButtonVariants = cva(
       size: "large",
       fullRadius: false,
     },
-  }
-)
+  },
+);
 
 export interface CompactButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof compactButtonVariants> {
-  asChild?: boolean
+  asChild?: boolean;
 }
 
 const CompactButton = React.forwardRef<HTMLButtonElement, CompactButtonProps>(
-  ({ className, variant, size, fullRadius, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+  (
+    { className, variant, size, fullRadius, asChild = false, ...props },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(compactButtonVariants({ variant, size, fullRadius, className }))}
+        className={cn(
+          compactButtonVariants({ variant, size, fullRadius, className }),
+        )}
         ref={ref}
         {...props}
       />
-    )
-  }
-)
-CompactButton.displayName = "CompactButton"
+    );
+  },
+);
+CompactButton.displayName = "CompactButton";
 
-export { CompactButton, compactButtonVariants }
+export { CompactButton, compactButtonVariants };

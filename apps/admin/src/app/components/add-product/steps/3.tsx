@@ -17,7 +17,8 @@ const formatFileSize = (bytes: number): string => {
 };
 
 export function AddProductEditionStep3() {
-  const { product, editProduct, setStep, file, setFile } = useAddProduct();
+  const { product, editProduct, setStep, file, setFile, categories } =
+    useAddProduct();
   const [AI, setAI] = useState(false);
 
   const generatePicture = async () => {
@@ -27,6 +28,7 @@ export function AddProductEditionStep3() {
         body: JSON.stringify({
           name: product.name,
           description: product.description,
+          category: categories.find((c) => c.id === product.categoryId)?.name,
         }),
         headers: { "Content-Type": "application/json" },
       });
@@ -88,7 +90,7 @@ export function AddProductEditionStep3() {
             alt="Product image"
             width={48}
             height={48}
-            className="bg-bg-weak-50 rounded-lg"
+            className="bg-bg-weak-50 rounded-lg w-12 aspect-square object-cover"
           />
           <div className="flex flex-col gap-1 w-full max-w-full overflow-hidden">
             <p className="flex items-center gap-1 min-w-0">

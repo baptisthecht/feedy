@@ -7,7 +7,7 @@ import {
   InputInlineAffix,
   InputRoot,
   InputWrapper,
-  LabelRoot,
+  Label,
 } from "@feedy/shared";
 import {
   RiInformation2Fill,
@@ -41,10 +41,10 @@ export function AddProductEditionStep2() {
       <hr className="border-stroke-soft-200 border-dashed" />
       <div className="flex flex-col gap-7">
         <div className="flex flex-col gap-1">
-          <LabelRoot htmlFor="email" className="gap-1">
+          <Label htmlFor="email" className="gap-1">
             <span>Prix du produit</span>
             <RiInformation2Fill className="text-text-disabled-300 size-4" />
-          </LabelRoot>
+          </Label>
 
           <InputRoot>
             <InputWrapper>

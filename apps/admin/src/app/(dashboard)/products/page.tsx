@@ -1,7 +1,8 @@
 import { PageHeader } from "@/app/components/layout/page-header";
+import { ProductStats } from "@/app/components/product-stats";
 import { getProducts } from "@/app/services/product";
 import { getRequiredUser } from "@/lib/auth-session";
-import { RiAddLine } from "@remixicon/react";
+import { RiAddLine, RiShoppingBag2Line } from "@remixicon/react";
 import { DataTableDemo } from "./table";
 
 export default async function Products() {
@@ -10,14 +11,12 @@ export default async function Products() {
     throw new Error("User has no last managed organization");
   }
   const products = await getProducts(user.lastManagedOrganizationId);
-  const fullName = user.firstname + " " + user.lastname;
   return (
     <main className="w-full h-full flex flex-col">
       <PageHeader
-        type="image"
-        title={fullName}
-        description="Quoi de neuf aujourd'hui ? 👋"
-        image="https://avatar.iran.liara.run/public/1"
+        title={"Mes produits"}
+        description="Gérez vos produits et leurs ingrédients"
+        icon={RiShoppingBag2Line}
         actions={[
           {
             label: "Nouveau produit",
@@ -27,11 +26,8 @@ export default async function Products() {
           },
         ]}
       />
-      <section className="p-4 h-full">
-        <div className="rounded-xl p-4 h-full border border-stroke-soft-200 bg-bg-white-0">
-          <DataTableDemo products={products} />
-        </div>
-      </section>
+      <ProductStats products={products} />
+      <DataTableDemo products={products} />
     </main>
   );
 }

@@ -5,8 +5,8 @@ import {
   InputIcon,
   InputRoot,
   InputWrapper,
+  Label,
   LabelAsterisk,
-  LabelRoot,
   LabelSub,
 } from "@feedy/shared";
 import { RiLockLine, RiMailLine } from "@remixicon/react";
@@ -39,11 +39,11 @@ export const LoginForm = () => {
         <hr className="w-full border-stroke-soft-200" />
         <div className="flex w-full flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <LabelRoot htmlFor="email">
+            <Label htmlFor="email">
               Email Address
               <LabelAsterisk />
               <LabelSub>(Optional)</LabelSub>
-            </LabelRoot>
+            </Label>
 
             <InputRoot>
               <InputWrapper>
@@ -60,10 +60,10 @@ export const LoginForm = () => {
         </div>
         <div className="flex w-full flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <LabelRoot htmlFor="password">
+            <Label htmlFor="password">
               Password
               <LabelAsterisk />
-            </LabelRoot>
+            </Label>
 
             <InputRoot>
               <InputWrapper>

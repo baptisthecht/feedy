@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const { name, description } = await request.json();
+  const { name, description, category } = await request.json();
   if (!name) {
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
   }
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const response = await fetch(process.env.OPENAI_URL_IMAGE, {
     method: "POST",
     body: JSON.stringify({
-      prompt: `A high-quality studio photo of an only single item of '${name}' (${description}), isolated on a clean white background. Photorealistic, 4K resolution, soft ambient lighting, minimal shadows, high sharpness, professional product photography style, centered composition.`,
+      prompt: `A high-quality studio photo of an only single item of '${name}' of category '${category}' (${description}), isolated on a clean white background. Photorealistic, 4K resolution, soft ambient lighting, minimal shadows, high sharpness, professional product photography style, centered composition.`,
       negative_prompt:
         "multiple objects, group, duplicate, background, clutter, text, logo, watermark, blur, low quality, poor lighting, shadows on background, reflections, distorted glass, out of focus",
     }),

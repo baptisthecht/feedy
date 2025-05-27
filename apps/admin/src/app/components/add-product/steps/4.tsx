@@ -12,6 +12,7 @@ import { RiPieChartFill } from "@remixicon/react";
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useMemo, useState } from "react";
+import { AddIngredientModal } from "../add-ingredient-modal";
 import { RESTRICTIONS, useAddProduct } from "../context";
 
 export function AddProductEditionStep4() {
@@ -67,6 +68,10 @@ export function AddProductEditionStep4() {
         </div>
       </div>
       <div className="flex flex-col gap-2">
+        <AddIngredientModal
+          value={inputValue}
+          resetValue={() => setInputValue("")}
+        />
         <InputRoot>
           <InputWrapper>
             <Input

@@ -31,16 +31,31 @@ export function UploadImageCard({
         />
       )}
       <div className="flex flex-col gap-1">
-        <p className="text-label-md text-text-sub-600">
-          Choisissez un fichier ou glissez-le ici.
-        </p>
-        <p className="text-label-sm text-text-soft-400">
-          JPEG, PNG, SVG et GIF, jusqu&apos;à 10MB.
-        </p>
+        {shining ? (
+          <>
+            <p className="text-label-md text-text-sub-600">
+              Génération en cours...
+            </p>
+            <p className="text-label-sm text-text-soft-400">
+              Cette opération peut prendre quelques secondes...
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-label-md text-text-sub-600">
+              Choisissez un fichier ou glissez-le ici.
+            </p>
+            <p className="text-label-sm text-text-soft-400">
+              JPEG, PNG, SVG et GIF, jusqu&apos;à 10MB.
+            </p>
+          </>
+        )}
       </div>
-      <Button variant="neutral" mode="stroke" size="xsmall" className="w-min">
-        Parcourir
-      </Button>
+      {!shining && (
+        <Button variant="neutral" mode="stroke" size="xsmall" className="w-min">
+          Parcourir
+        </Button>
+      )}
       <input
         type="file"
         accept="image/*"

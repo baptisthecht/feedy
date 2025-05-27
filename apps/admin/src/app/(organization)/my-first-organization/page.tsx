@@ -8,8 +8,8 @@ import {
   InputIcon,
   InputRoot,
   InputWrapper,
+  Label,
   LabelAsterisk,
-  LabelRoot,
 } from "@feedy/shared";
 import { RiBuildingLine, RiInformationFill } from "@remixicon/react";
 import Image from "next/image";
@@ -46,9 +46,9 @@ export default async function MyFirstOrganization() {
           ))}
         </div>
         <div className="flex w-full flex-col gap-1">
-          <LabelRoot>
+          <Label>
             Nom de l&apos;établissement <LabelAsterisk />
-          </LabelRoot>
+          </Label>
           <InputRoot>
             <InputWrapper>
               <InputIcon as={RiBuildingLine} />

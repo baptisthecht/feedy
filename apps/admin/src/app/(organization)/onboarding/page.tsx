@@ -9,7 +9,7 @@ import {
   InputIcon,
   InputRoot,
   InputWrapper,
-  LabelRoot,
+  Label,
 } from "@feedy/shared";
 import { RiInformationFill, RiMapPinLine } from "@remixicon/react";
 import Link from "next/link";
@@ -37,7 +37,7 @@ export default function Onboarding() {
           ))}
         </div>
         <div className="flex w-full flex-col gap-1">
-          <LabelRoot>Adresse de l&apos;établissement</LabelRoot>
+          <Label>Adresse de l&apos;établissement</Label>
           <InputRoot>
             <InputWrapper>
               <InputIcon as={RiMapPinLine} />

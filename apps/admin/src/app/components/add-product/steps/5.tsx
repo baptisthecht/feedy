@@ -1,5 +1,5 @@
 import { appear } from "@/motions/appear";
-import { Button, LabelRoot, Switch, Tag } from "@feedy/shared";
+import { Button, Label, Switch, Tag } from "@feedy/shared";
 import { RiShoppingBasket2Fill } from "@remixicon/react";
 import { motion } from "framer-motion";
 import { RESTRICTIONS, useAddProduct } from "../context";
@@ -102,9 +102,9 @@ export function AddProductEditionStep5() {
           checked={available}
           onCheckedChange={setAvailable}
         />
-        <LabelRoot className="text-paragraph-sm" htmlFor={"available"}>
+        <Label className="text-paragraph-sm" htmlFor={"available"}>
           Publier le produit immédiatement
-        </LabelRoot>
+        </Label>
       </div>
       <Button disabled={!product.basePrice} onClick={handleCreateProduct}>
         Confirmer la création
